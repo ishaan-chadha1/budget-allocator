@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import ExpenseItem from './ExpenseItem';
-import { AppContext } from '../context/AppContext';
+import { BudgetContext } from '../context/BudgetContext';
+
 const ExpenseList = () => {
-    const { expenses } = useContext(AppContext);
+    const { expenses } = useContext(BudgetContext);
     
     return (
         <table className='table'>
