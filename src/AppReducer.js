@@ -1,3 +1,5 @@
+// AppReducer.js
+
 const AppReducer = (state, action) => {
     switch (action.type) {
       case 'DELETE_EXPENSE':
@@ -10,7 +12,7 @@ const AppReducer = (state, action) => {
       case 'ADD_EXPENSE':
         return {
           ...state,
-          expenses: [action.payload, ...state.expenses],
+          expenses: [{ ...action.payload, cost: Number(action.payload.cost) }, ...state.expenses],
         };
       case 'INCREASE_EXPENSE':
         return {
@@ -33,7 +35,7 @@ const AppReducer = (state, action) => {
       case 'ADD_ALLOCATION':
         return {
           ...state,
-          allocations: [action.payload, ...state.allocations],
+          allocations: [{ ...action.payload, cost: Number(action.payload.cost) }, ...state.allocations],
         };
       case 'DELETE_ALLOCATION':
         return {
@@ -63,7 +65,7 @@ const AppReducer = (state, action) => {
       case 'EDIT_BUDGET':
         return {
           ...state,
-          budget: action.payload,
+          budget: Number(action.payload),
         };
       case 'CHANGE_CURRENCY':
         return {

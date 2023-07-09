@@ -13,6 +13,7 @@ const initialState = {
 };
 
 export const BudgetContext = createContext(initialState);
+// BudgetContext.js
 
 export const BudgetProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -27,7 +28,7 @@ export const BudgetProvider = ({ children }) => {
   function addExpense(expense) {
     dispatch({
       type: 'ADD_EXPENSE',
-      payload: expense,
+      payload: { ...expense, cost: Number(expense.cost) },
     });
   }
 
@@ -48,7 +49,7 @@ export const BudgetProvider = ({ children }) => {
   function addAllocation(allocation) {
     dispatch({
       type: 'ADD_ALLOCATION',
-      payload: allocation,
+      payload: { ...allocation, cost: Number(allocation.cost) },
     });
   }
 
@@ -76,7 +77,7 @@ export const BudgetProvider = ({ children }) => {
   function editBudget(amount) {
     dispatch({
       type: 'EDIT_BUDGET',
-      payload: amount,
+      payload: Number(amount),
     });
   }
 
