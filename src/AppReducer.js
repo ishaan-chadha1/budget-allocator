@@ -1,26 +1,35 @@
 const AppReducer = (state, action) => {
     switch (action.type) {
-    case 'DELETE_EXPENSE':
+      case 'DELETE_EXPENSE':
         return {
-            ...state,
-            expenses: state.expenses.filter(
+          ...state,
+          expenses: state.expenses.filter(
             (expense) => expense.id !== action.payload
-            ),
+          ),
         };
-        case 'ADD_EXPENSE':
+      case 'ADD_EXPENSE':
         return {
-            ...state,
-            expenses: [action.payload, ...state.expenses],
+          ...state,
+          expenses: [action.payload, ...state.expenses],
         };
-        case 'INCREASE_EXPENSE':
-      return {
-        ...state,
-        expenses: state.expenses.map((expense) =>
-          expense.id === action.payload
-            ? { ...expense, cost: Number(expense.cost) + 10 }
-            : expense
-        ),
-      };
+      case 'INCREASE_EXPENSE':
+        return {
+          ...state,
+          expenses: state.expenses.map((expense) =>
+            expense.id === action.payload
+              ? { ...expense, cost: Number(expense.cost) + 10 }
+              : expense
+          ),
+        };
+      case 'DECREASE_EXPENSE':
+        return {
+          ...state,
+          expenses: state.expenses.map((expense) =>
+            expense.id === action.payload
+              ? { ...expense, cost: Number(expense.cost) - 10 }
+              : expense
+          ),
+        };
       case 'ADD_ALLOCATION':
         return {
           ...state,
@@ -31,6 +40,24 @@ const AppReducer = (state, action) => {
           ...state,
           allocations: state.allocations.filter(
             (allocation) => allocation.id !== action.payload
+          ),
+        };
+      case 'INCREASE_ALLOCATION':
+        return {
+          ...state,
+          allocations: state.allocations.map((allocation) =>
+            allocation.id === action.payload
+              ? { ...allocation, cost: Number(allocation.cost) + 10 }
+              : allocation
+          ),
+        };
+      case 'DECREASE_ALLOCATION':
+        return {
+          ...state,
+          allocations: state.allocations.map((allocation) =>
+            allocation.id === action.payload
+              ? { ...allocation, cost: Number(allocation.cost) - 10 }
+              : allocation
           ),
         };
       case 'EDIT_BUDGET':
@@ -46,6 +73,7 @@ const AppReducer = (state, action) => {
       default:
         return state;
     }
-};
-
-export default AppReducer;
+  };
+  
+  export default AppReducer;
+  

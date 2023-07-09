@@ -37,6 +37,14 @@ export const BudgetProvider = ({ children }) => {
       payload: id,
     });
   }
+
+  function decreaseExpense(id) {
+    dispatch({
+      type: 'DECREASE_EXPENSE',
+      payload: id,
+    });
+  }
+
   function addAllocation(allocation) {
     dispatch({
       type: 'ADD_ALLOCATION',
@@ -47,6 +55,20 @@ export const BudgetProvider = ({ children }) => {
   function deleteAllocation(id) {
     dispatch({
       type: 'DELETE_ALLOCATION',
+      payload: id,
+    });
+  }
+
+  function increaseAllocation(id) {
+    dispatch({
+      type: 'INCREASE_ALLOCATION',
+      payload: id,
+    });
+  }
+
+  function decreaseAllocation(id) {
+    dispatch({
+      type: 'DECREASE_ALLOCATION',
       payload: id,
     });
   }
@@ -75,8 +97,11 @@ export const BudgetProvider = ({ children }) => {
         deleteExpense,
         addExpense,
         increaseExpense,
+        decreaseExpense,
         addAllocation,
         deleteAllocation,
+        increaseAllocation,
+        decreaseAllocation,
         editBudget,
         changeCurrency,
       }}
