@@ -1,12 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { BudgetContext } from '../context/BudgetContext';
+import Select from 'react-select';
 
 const ExpenseForm = () => {
-  const { addExpense, currency } = useContext(BudgetContext);
+  const { addExpense, currency, changeCurrency } = useContext(BudgetContext);
   const [name, setName] = useState('');
   const [cost, setCost] = useState('');
   const [error, setError] = useState(false);
+
+  const options = [
+    { value: '$', label: 'Dollar ($)' },
+    { value: '£', label: 'Pound (£)' },
+    { value: '€', label: 'Euro (€)' },
+    { value: '₹', label: 'Rupee (₹)' },
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,6 +33,10 @@ const ExpenseForm = () => {
     } else {
       setError(true);
     }
+  };
+
+  const handleCurrencyChange = (selectedOption) => {
+    changeCurrency(selectedOption.value);
   };
 
   return (
@@ -56,6 +68,14 @@ const ExpenseForm = () => {
               onChange={(event) => setCost(event.target.value)}
             ></input>
           </div>
+        </div>
+        <div className='col-sm'>
+          <label htmlFor='currency'>Currency</label>
+          <Select
+            defaultValue={options[0]}
+            onChange={handleCurrencyChange}
+            options={options}
+          />
         </div>
       </div>
       <div className='row'>
