@@ -1,31 +1,31 @@
 import React, { useContext } from 'react';
-import { TiDelete } from 'react-icons/ti';
-import { AppContext } from '../context/AppContext';
+import { BudgetContext } from '../context/BudgetContext';
+
 const ExpenseItem = (props) => {
-    const { dispatch } = useContext(AppContext);
-    const handleDeleteExpense = () => {
-        dispatch({
-            type: 'DELETE_EXPENSE',
-            payload: props.id,
-        });
-    };
-    const increaseAllocation = (name) => {
-        const expense = {
-            name: name,
-            cost: 10,
-        };
-        dispatch({
-            type: 'ADD_EXPENSE',
-            payload: expense
-        });
-    }
-    return (
-        <tr>
-        <td>{props.name}</td>
-        <td>£{props.cost}</td>
-        <td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
-        <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
-        </tr>
-    );
+  const { deleteExpense, increaseExpense, currency } = useContext(BudgetContext);
+
+  return (
+    <tr>
+      <td>{props.name}</td>
+      <td>{currency}{props.cost}</td>
+      <td>
+        <button
+          onClick={() => increaseExpense(props.id)}
+          className='btn btn-primary btn-sm'
+        >
+          +
+        </button>
+      </td>
+      <td>
+        <button
+          onClick={() => deleteExpense(props.id)}
+          className='btn btn-danger btn-sm'
+        >
+          X
+        </button>
+      </td>
+    </tr>
+  );
 };
+
 export default ExpenseItem;

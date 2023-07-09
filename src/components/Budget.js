@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import { BudgetContext } from '../context/BudgetContext';
+
 const Budget = () => {
-    const { budget } = useContext(AppContext);
-    return (
-        <div className='alert alert-secondary'>
-            <span>Budget: £{budget}</span>
-        </div>
-    );
+  const { budget, currency } = useContext(BudgetContext);
+
+  return (
+    <div className='alert alert-secondary'>
+      <span>Budget: {currency}{budget}</span>
+    </div>
+  );
 };
+
 export default Budget;
